@@ -12,7 +12,7 @@ class Connect():
         # Create a socket (connecting two computers)
         try:
             self.host = ""
-            self.port = 9998
+            self.port = 9999
             self.s = socket.socket()
             self.bind_socket()
         except socket.error as msg:
@@ -46,13 +46,18 @@ class Connect():
     def send_command(self, conn):
         # Send commands to client
         while True:
-            user_input = input("Enter something: ")
+            try:
+                user_input = input("Enter something: ")
 
-            if len(str.encode(user_input)) > 0:
-                conn.send(str.encode(user_input))
-                # to recieve information from client
-                client_response = str(conn.recv(1024), "utf-8")
-                print(client_response)
+                if len(str.encode(user_input)) > 0:
+                    conn.send(str.encode(user_input))
+                    # to recieve information from client
+                    client_response = str(conn.recv(1024), "utf-8")
+                    print(client_response)
+            except:
+                conn.close()
+                print("Connection closed.")
+                break
 
 
 if __name__ == "__main__":
