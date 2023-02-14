@@ -43,16 +43,9 @@ class Hand:
             fingers = self.detector.fingersUp()
             show_frame[:, 100:540, :] = frame
 
-            # Finger filters
-            if len(self.old_message) == 0:
-                self.old_message = fingers
-            elif fingers == self.old_message and self.counter != 5:
-                self.counter += 1
-
-            if self.counter == 5:
-                data = str(sum(self.old_message))
-                self.socket.send_command(data)
-                self.old_message = []
+            # Sending data
+            data = str(sum(fingers))
+            self.socket.send_command(data)
 
             # Debug
             cv2.putText(frame, str(int(fps)), (20, 60),

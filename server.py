@@ -22,6 +22,7 @@ class Connect():
         # Binding the socket and listening for connections
         try:
             print("Binding the port " + str(self.port))
+            print("Waiting for connection")
 
             self.s.bind((self.host, self.port))
             self.s.listen(1)  # we are listenning for 1 connection
@@ -35,8 +36,8 @@ class Connect():
         # Establish connection with a client (socket must be listenning)
         # conn will be the object of a connection, address is the list of ip and port
         conn, address = self.s.accept()
-        print("Connection has been established. IP: " +
-              address[0] + " Port: "+str(address[1]))
+        print("Connection established at IP: " +
+              address[0] + " & Port: "+str(address[1]))
 
         # whenever we want to send something we will use this conn object
         self.send_command(conn)
@@ -56,7 +57,7 @@ class Connect():
                     print(client_response)
             except:
                 conn.close()
-                print("Connection closed.")
+                print("\nConnection closed.")
                 break
 
 
