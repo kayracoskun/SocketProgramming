@@ -25,7 +25,7 @@ class Connect():
             print("Waiting for connection")
 
             self.s.bind((self.host, self.port))
-            self.s.listen(1)  # we are listenning for 1 connection
+            self.s.listen(2)  # we are listenning for 1 connection
             self.socket_accept()
 
         except socket.error as msg:
